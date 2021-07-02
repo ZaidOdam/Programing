@@ -22,7 +22,6 @@ struct Node
 
 class LRUCache
 {
-
 private:
 public:
     static int capacity;
