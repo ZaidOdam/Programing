@@ -1,8 +1,8 @@
 $ git init
 $ git config --global user.name"vinay"
-$ git config --global user.email"vinaysarda2812@gmai.com" //ex->$ git remote add origin git@github.com:Vinay2812/Games.git
-$ git remote add origin control <ssh link>
-$ git commit -m "Initial"
+$ git config --global user.email"vinaysarda2812@gmai.com" 
+$ git remote add origin control <ssh link> //ex->$ git remote add origin git@github.com:Vinay2812/Games.git
+$ git commit -m "message"
 
 //if already repositary exist then start from here
 $ git init
@@ -10,12 +10,6 @@ $ git add .
 $ git commit -m "ur message"
 $ git status
 $ git push origin master
-
-//to restore before commit files ->
-$ git checkout file name
-//to restore multiple file before commit ->
-$ git checkout -f
-
 
 
 
