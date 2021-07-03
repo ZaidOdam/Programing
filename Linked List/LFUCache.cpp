@@ -48,13 +48,15 @@ private:
             size--;
         }
     };
-    map<int, List *> frequencyList;
+ 
+    unordered_map<int, List *> frequencyList;
     unordered_map<int, Node *> mp;
 
 public:
 
     LFUCache(int capacity)
     {
+        count=0;
         cap=capacity;
         minFreq=1;
         frequencyList.clear();
@@ -62,13 +64,11 @@ public:
     }
     void updateFrequencyList(Node *node)
     {
-        int key=node->key;
-        mp.erase(key);
-        int freq=node->frequency;
+        /*int freq=node->frequency;
         frequencyList[freq]->remove(node);
 
         if (freq == minFreq && frequencyList[freq]->size == 0)
-        minFreq = freq + 1;
+        minFreq = minFreq + 1;
 
         List *nextFrequencyList=new List();
 
@@ -78,7 +78,22 @@ public:
         node->frequency++;
         nextFrequencyList->add(node);
         frequencyList[node->frequency]=nextFrequencyList;
-        mp[key]=node;
+        mp[key]=node;*/
+
+
+        frequencyList[node->frequency]->remove(node);
+
+        if (node->frequency == minFreq && frequencyList[node->frequency]->size==0)
+        minFreq++;
+
+        List *nextList=new List();  
+        if(frequencyList.find(node->frequency +1)!=frequencyList.end()) 
+        nextList=frequencyList[node->frequency +1]; 
+
+        node->frequency++;
+        nextList->add(node);
+        frequencyList[node->frequency]=nextList;
+        mp[node->key]=node;
     }
 
     int get(int key)
@@ -95,7 +110,7 @@ public:
         if(cap==0)
             return;
 
-        if(mp.find(key)!=mp.end())
+        /*if(mp.find(key)!=mp.end())
         {
             Node *node=mp[key];
             node->value=value;
@@ -121,6 +136,30 @@ public:
         }
         newList->add(node);
         frequencyList[minFreq]=newList;
+        mp[key]=node;*/
+
+        if(mp.find(key)!=mp.end())
+        {
+            mp[key]->value=value;
+            updateFrequencyList(mp[key]);
+            return;
+        }
+        if(count==cap)
+        {
+            Node *node=frequencyList[minFreq]->tail->prev;
+            mp.erase(node->key);
+            frequencyList[minFreq]->remove(node);
+            count--;
+        }
+        minFreq=1;
+        count++;
+        List * newList=new List();
+        if(frequencyList.find(minFreq)!=frequencyList.end())
+        newList =frequencyList[minFreq];
+
+        Node *node=new Node(key,value);
+        newList->add(node);
+        frequencyList[minFreq]=newList;
         mp[key]=node;
     }
 };
@@ -131,5 +170,16 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
+    LFUCache lf(2);
+
+    lf.set(1,2);
+    lf.set(2,3);
+    lf.set(3,4);
+    cout<<lf.get(1)<<" "; //->-1
+    cout<<lf.get(3)<<" ";//->4
+    lf.set(2,2);
+    lf.set(4,5);
+    cout<<lf.get(2)<<" ";//2
+    cout<<lf.get(3)<<" ";//-1
     return 0;
 }
