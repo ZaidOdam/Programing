@@ -9,7 +9,13 @@ $ git init
 $ git add .
 $ git commit -m "ur message"
 $ git status
-$ git push -u origin master
+$ git push origin master
+
+//to restore before commit files ->
+$ git checkout file name
+//to restore multiple file before commit ->
+$ git checkout -f
+
 
 
 
