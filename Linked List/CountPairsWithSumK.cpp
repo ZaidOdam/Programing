@@ -31,12 +31,13 @@ int countPairs(Node *head,int k)
         if (sum==k)
         {
             count++;
-            head=head->next;
-            tail=tail->prev;
             while(head->next!=tail && head->data==head->next->data)
             head=head->next;
             while (tail->prev!=head && tail->data==tail->prev->data)
             tail = tail->prev;
+            head=head->next;
+            tail=tail->prev;
+           
         }
         if(sum>k)
         {
