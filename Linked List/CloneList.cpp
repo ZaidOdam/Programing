@@ -115,10 +115,7 @@ int main()
     int T, i, n, l, k;
     Node *generated_addr = NULL;
     /*reading input stuff*/
-    cin >> T;
-
-    while (T--)
-    {
+    
         generated_addr = NULL;
         struct Node *head = NULL, *tail = NULL;
         struct Node *head2 = NULL, *tail2 = NULL;
@@ -179,7 +176,6 @@ int main()
             cout << validation(head2, res) << endl;
         else
             cout << 0 << endl;
-    }
 
     return 0;
 } // } Driver Code Ends
@@ -199,53 +195,56 @@ struct Node {
 };
 */
 
+void insertNode(Node *head)
+{
+    Node *curr=head;
+
+    while(curr!=NULL)
+    {
+        Node *node=new Node(curr->data);
+        node->next=curr->next;
+        curr->next=node;
+        curr=curr->next->next;
+    } 
+}
+
+void setRandom(Node *head)
+{
+    Node *curr=head;
+
+    while(curr!=NULL)
+    {
+        //cant update next of curr and clone since ahead nodes may need the prev -> next
+        if(curr->arb!=NULL)
+        curr->next->arb = curr->arb->next;
+
+        curr=curr->next->next;
+    }
+}
+
+void getList(Node *head,Node **clone)
+{
+    Node *s=new Node(-1);
+    Node *t=s;
+    Node *s1=head;
+
+    while(s1!=NULL)
+    {
+        t->next=s1->next;
+        t=t->next;
+        s1->next=t->next;
+        s1=s1->next;
+    }
+
+    *clone= s->next;
+
+}
+
 //Function to clone a linked list with next and random pointer.
 Node *copyList(Node *head)
 {
 
-    //     if(head==NULL)return head;
-
-    //   Node *temp=head,*front;
-    //   Node *start=new Node(-1);
-    //   Node *tail=start;
-
-    //   while(temp!=NULL)
-    //   {
-    //       Node *node=new Node(temp->data);
-    //       node->next=temp->next;
-    //       temp->next=node;
-    //       temp=node->next;
-    //   }
-
-    //   temp=head;
-
-    //   while(temp!=NULL)
-    //   {
-    //       if(temp->arb!=NULL)
-    //       temp->next->arb=temp->arb->next;
-    //       else
-    //       temp->next->arb=NULL;
-
-    //       temp=temp->next->next;
-    //   }
-    //   temp=head;
-
-    //   while(temp!=NULL)
-    //   {
-    //       //front=temp->next->next;
-
-    //       tail->next=temp->next;
-
-    //       temp->next=tail->next->next;
-
-    //       tail=tail->next;
-
-    //       temp=temp->next;
-    //   }
-
-    //   return start->next;
-
-    unordered_map<Node *, Node *> mp;
+   /* unordered_map<Node *, Node *> mp;
 
     Node *newHead = NULL;
 
@@ -270,5 +269,11 @@ Node *copyList(Node *head)
 
         curr = curr->next;
     }
-    return newHead;
+    return newHead;*/
+
+    insertNode(head);
+    setRandom(head);
+    Node *clone =NULL;
+    getList(head,&clone);
+    return clone;
 }
