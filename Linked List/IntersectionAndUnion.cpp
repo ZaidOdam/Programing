@@ -55,11 +55,8 @@ Node *unsortedUnion(Node *h1,Node *h2)
             t->next=h2;
             t=t->next;
         }
-        
         h2=h2->next;
-        
-
-        
+  
     }
     t->next=NULL;
 
@@ -109,11 +106,11 @@ Node *Intersection(Node *h1,Node *h2)
 
     while(h1!=NULL && h2!=NULL)
     {
-        while(h1->next!=NULL && h1->data ==h1->next->data)
-        h1=h1->next;
+        // while(h1->next!=NULL && h1->data ==h1->next->data)
+        // h1=h1->next;
 
-        while (h2->next != NULL && h2->data == h2->next->data)
-        h2 = h2->next;
+        // while (h2->next != NULL && h2->data == h2->next->data)
+        // h2 = h2->next;
 
         if(h1->data == h2->data)
         {
@@ -151,7 +148,7 @@ Node *Union(Node *h1,Node *h2)
 
     while(h1!=NULL && h2!=NULL)
     {
-        if(h1->data==h2->data)
+        if(h1->data == h2->data)
         {
             t->next=h1;
             h1=h1->next;
@@ -169,18 +166,11 @@ Node *Union(Node *h1,Node *h2)
         }
         t=t->next;
     }
-    
-    t->next=NULL;
 
     if(h1!=NULL)
-    {
         t->next=h1;
-    }
-
-    if(h2!=NULL)
-    {
+    else
         t->next=h2;
-    }
 
     return s->next;
     
