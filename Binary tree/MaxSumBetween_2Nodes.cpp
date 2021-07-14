@@ -18,16 +18,15 @@ struct Node
 int maxSum;
 int findSum(Node*root)
 {
-    if(root==NULL){
+    if(root==NULL)
         return 0;
-    }
 
     int ls=findSum(root->left);
     int rs=findSum(root->right);
 
-    maxSum=max(maxSum,ls+rs+root->data);
+    maxSum = max(maxSum,(ls + rs + root->data));
 
-    return max(max(ls,rs)+root->data,0);
+    return max((max(ls,rs)+root->data),0);
 }
 
 int findMaxSum(Node *root)
@@ -40,12 +39,12 @@ int findMaxSum(Node *root)
 
 int main()
 {
-    struct Node *root,*target;
+    struct Node *root;
     //level 0
     root = new Node(1);
     //level 1
     root->left = new Node(2);
-    target=root->right = new Node(3);
+    root->right = new Node(3);
     //level 2
     root->left->left = new Node(-4);
     root->left->right = new Node(5);
@@ -62,7 +61,7 @@ int main()
           /\    /\
        -4  5 -6   -7
               /  /
-           -9   -8 
+            -9   -8 
     */
 
     cout<<findMaxSum(root);
