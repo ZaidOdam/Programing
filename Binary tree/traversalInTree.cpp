@@ -23,21 +23,22 @@ void preorderUsingRecursion(Node *root){
 }
 
 void preorderWithoutRecursion(Node *root){
-    stack<Node*>st;
-
+    stack<Node *>st;
     while(1)
     {
-        while(root)
+        while(root!=NULL)
         {
             cout<<root->data<<" ";
             st.push(root);
             root=root->left;
         }
+        
         if(st.empty())
             break;
+
         root=st.top();
         st.pop();
-        root=root->right;    
+        root=root->right; 
     }
 }
 
@@ -51,14 +52,17 @@ void inorderUsingRecursion(Node *root){
 
 void inorderWithoutRecursion(Node *root)
 {
-    stack<Node*>st;
-    while(1){
-        while(root){
+    stack<Node *>st;
+    while(1)
+    {
+        while(root!=NULL)
+        {
             st.push(root);
             root=root->left;
         }
         if(st.empty())
             break;
+
         root=st.top();
         st.pop();
         cout<<root->data<<" ";
@@ -75,27 +79,36 @@ void postorderUsingRecursion(Node *root){
 }
 
 void postorderWithoutRecursion(Node *root){
-    stack<Node*>st;
-    Node * prevNode=NULL;
-
-    do{
-        while(root!=NULL){
+    stack<Node *>st;
+    Node *prevNode=NULL;
+    while(1)
+    {
+        while(root!=NULL)
+        {
             st.push(root);
             root=root->left;
         }
 
-        while(root==NULL && !st.empty()){
+        while(root==NULL && !st.empty())
+        {
             root=st.top();
-            if(root->right==NULL || root->right==prevNode){
+            if(root->right==NULL || root->right==prevNode)
+            {
                 st.pop();
                 cout<<root->data<<" ";
                 prevNode=root;
                 root=NULL;
             }
-            else    
+            else
+            {
                 root=root->right;
+            }
+            
         }
-    }while(!st.empty());
+        if(st.empty())
+            break;
+    }
+    
 }
 
 void levelorder(Node *root){
