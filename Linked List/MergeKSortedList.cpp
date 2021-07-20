@@ -88,26 +88,29 @@ void print(Node *head)
 
 int main()
 {
-    int n;
-    cin>>n;
+    int k;
+    cin>>k;
 
-    vector<int> arr[n];
-    Node *head[n];
-
-    for(int i=0;i<n;i++)
-    {
-        int m;
-        cin>>m;
-        for(int i=0;i<m;i++){
-            int val;
-            cin>>val;
-            arr[i].push_back(val);
+    Node *head[k];
+    vector<int>arr;
+    
+    for(int i=0;i<k;i++){
+        int n;
+        cin>>n;
+        for(int j=0;j<n;j++){
+            int data;
+            cin>>data;
+            arr.push_back(data);
         }
-        head[i]=create(arr[i]);
+        head[i]=create(arr);
+        arr.clear();
+    }
+    cout<<endl;
+    for(int i=0;i<k;i++){
         print(head[i]);
     }
-   
-   Node *head1=mergeKSortedList(head ,n);
+    cout<<"\nAfter Merging K list :\n\n";
+   Node *head1=mergeKSortedList(head ,k);
 
     print(head1);
 }

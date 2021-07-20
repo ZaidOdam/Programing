@@ -23,7 +23,8 @@ struct cmp{
 
 Node *sortKSortedList(Node *head, int k)
 {
-    Node *kthNode = head;
+   
+   /* Node *kthNode = head;
     Node *i = head, *j;
     for (int i = 0; i < k+1; i++)
     {
@@ -42,42 +43,36 @@ Node *sortKSortedList(Node *head, int k)
         i=i->next;
     }
 
-    return head;
+    return head;*/
     
-   /*priority_queue<Node *,vector<Node *>,cmp>pq;
-    Node *curr=head;
-    for(int i=0;i<k+1 and curr!=NULL;i++,curr=curr->next)
-    {
-        pq.push(curr);
+    priority_queue<Node *,vector<Node*>,cmp>pq;
+
+    for(int i=0;i<k;i++){
+        pq.push(head);
+        head=head->next;
+
+        if(head == NULL)
+            break;
     }
-    
-   Node *last=NULL;
-    head = NULL;
+
+    Node *s=new Node(-1);
+    Node *t=s;
+
     while(!pq.empty())
     {
-        if(head==NULL)
-        {
-            head=pq.top();
-            head->prev=NULL;
-            last=head;
-            
-        }
-        else
-        {
-            last->next=pq.top();
-           last->next->prev=last;
-            last=last->next;
-
-        }
+        t->next=pq.top();
+        t->next->prev=t;
         pq.pop();
-        if (curr != NULL)
-        {
-            pq.push(curr);
-            curr=curr->next;
+        t=t->next;
+
+        if(head!=NULL){
+            pq.push(head);
+            head=head->next;
         }
     }
-    last->next=NULL;
-    return head;*/
+    t->next = NULL;
+    s->next->prev=NULL;
+    return s->next;
 }
 
 Node *insertAtTail(Node *tail, int val)
@@ -138,10 +133,11 @@ int main()
 
     print(head);
     // head=reverseDLL(head);
-    head = sortKSortedList(head,4);
+
+    cout<<"After Sorting :"<<endl;
+    head = sortKSortedList(head,3);
     print(head);
     tail=head;
-
     while(tail->next!=NULL)tail=tail->next;
 
     print(tail);
