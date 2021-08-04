@@ -79,23 +79,16 @@ void printInorder(Node *root)
 }
 int main()
 {
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
-    // cout.tie(NULL);
-    // vector<int> arr = {4,5,6,10,11,12,13};
-    // Node *root = build(arr,0,arr.size()-1);
-    // printInorder(root);
-    // int k=3;
-    // cout <<"\n"<<k<<"th smallest element is : "
-    //     <<kthSmallest(root,k)<<" "<<k<<"th largest element is : "
-    //     <<kthLargest(root,k);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    vector<int> arr = {4,5,6,10,11,12,13};
+    Node *root = build(arr,0,arr.size()-1);
+    printInorder(root);
+    int k=3;
+    cout <<"\n"<<k<<"th smallest element is : "
+        <<kthSmallest(root,k)<<" "<<k<<"th largest element is : "
+        <<kthLargest(root,k);
 
-    int k = 5;
-    int *p = &k; //p address of k
-    cout << p << " " << *p << " "; //0x61ff04
-    int **m = &p; //address of k
-    **m = 10;
-
-    cout << k;
     return 0;
 }
