@@ -1,6 +1,9 @@
-//Bottom View of Tree
 #include <bits/stdc++.h>
 using namespace std;
+
+void timpass(){
+    return;
+}
 
 struct Node
 {
